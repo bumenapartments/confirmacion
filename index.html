@@ -157,6 +157,10 @@ body{font-family:'Inter',sans-serif;background:#f4f1ec;color:#2c2c2c;min-height:
         <input type="text" id="fTotal" placeholder="Ej: U$S 725"/>
       </div>
     </div>
+    <div class="field">
+      <label>Seña <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#bbb">(opcional)</span></label>
+      <input type="text" id="fSenia" placeholder="Ej: U$S 200"/>
+    </div>
     <button class="btn-generar" onclick="generarConfirmacion()">Generar confirmación →</button>
   </div>
 </div>
@@ -242,6 +246,7 @@ body{font-family:'Inter',sans-serif;background:#f4f1ec;color:#2c2c2c;min-height:
           <div class="label">Total de la reserva</div>
           <div class="value money" id="confTotal">—</div>
           <div class="sub" id="confTotalSub">— · Acordado por WhatsApp</div>
+          <div class="sub" id="confSeniaRow" style="display:none;margin-top:6px;color:#e67e22;font-weight:600;">🤝 Seña: <span id="confSenia"></span></div>
         </div>
         <div class="detail-card full">
           <div class="label">Titular de la reserva</div>
@@ -407,6 +412,13 @@ function generarConfirmacion() {
   document.getElementById("confHuespedes").textContent   = `${nhuesp} persona${nhuesp!=1?"s":""}`;
   document.getElementById("confTotal").textContent       = total;
   document.getElementById("confTotalSub").textContent    = `${nights} noches · Acordado por WhatsApp`;
+  const senia = document.getElementById("fSenia").value.trim();
+  if (senia) {
+    document.getElementById("confSenia").textContent    = senia;
+    document.getElementById("confSeniaRow").style.display = "block";
+  } else {
+    document.getElementById("confSeniaRow").style.display = "none";
+  }
   document.getElementById("confTitular").textContent     = huesped;
   document.getElementById("confCapacidad").textContent   = `${nhuesp} persona${nhuesp!=1?"s":""}`;
   document.getElementById("confIngreso").innerHTML =
